@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>carousel</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/animate.js"></script>
+</head>
+
+<body>
+	<div class="bigbox" id="bigbox">
+		<div class="title" id="title">
+			<div id="pic"><img src="images/a15.png"></div>
+			<div class="text1">
+				<ul class="ul" id="ul" style="left:1020px;">
+					<li class="txt">[温馨提示]最近有不少不法分子在网上骗人，请大家注意！！！</li>
+					<li class="txt">[温馨提示]最近有不少不法分子在网上骗人，请大家注意！！！</li>
+				</ul>
+			</div>
+		</div>
+		<div class="box" id="box">
+			
+			<div class="slider" id="slider">
+				<div class="slide"><img src="images/b5.png" alt=""></div>
+				<div class="slide"><img src="images/b1.png" alt=""></div>
+				<div class="slide"><img src="images/b2.png" alt=""></div>
+				<div class="slide"><img src="images/b3.png" alt=""></div>
+				<div class="slide"><img src="images/b4.png" alt=""></div>
+				<div class="slide"><img src="images/b5.png" alt=""></div>
+				<div class="slide"><img src="images/b1.png" alt=""></div>
+			</div>
+			<span id="lef"> < </span>
+			<span id="right"> > </span>
+			<ul class="nav" id="nav">
+				<li class="active">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		var ul=document.getElementById("ul");
+		var box = document.getElementById('box');
+		var slider = document.getElementById('slider');
+		var left = document.getElementById('left');
+		var right = document.getElementById('right');
+		var oNavlist = document.getElementById('nav').children;
+		var index = 1; //打开页面生效的图片的下标为1
+		//文字滚动
+        function show() {
+            //获取left值，文字移动位置
+            left = ul.offsetLeft - 1; 
+            ul.style.left = left + "px";
+            if (-1 * ul.offsetLeft >= ul.offsetWidth / 2) {
+                ul.style.left = 0;
+            }
+        }
+        window.onload = setInterval(show, 30);
+        //鼠标移上移下事件
+		var timer;
+		var isMoving = false;
+		box.onmouseover = function () {
+			animate(lef, {opacity: 50});
+			animate(right, {opacity: 50});
+			clearInterval(timer); //图片停止滚动
+		}
+		box.onmouseout = function () {
+			animate(lef, {opacity: 0});
+			animate(right, {opacity: 0});
+			timer = setInterval(next, 3000); //图片开始接着滚动
+		}
+		right.onclick = next;//后一个图片
+		lef.onclick = prev;//前一个图片
+		//下一张图片函数
+		function next() {
+			if (isMoving) {
+				return;
+			}
+			isMoving = true;
+			index++;
+			navmove();
+			animate(slider, {left: -1200 * index}, function () {
+				if (index == 6) {
+					slider.style.left = '-1200px';
+					index = 1;
+				}
+				isMoving = false;
+			});
+		}
+		//上一张图片函数
+		function prev() {
+			if (isMoving) {
+				return;
+			}
+			isMoving = true;
+			index--;
+			navmove();
+			animate(slider, {left: -1200 * index}, function () {
+				if (index == 0) {
+					slider.style.left = '-6000px';
+					index = 5;
+				}
+				isMoving = false;
+			});
+		}
+		//按钮点击切换事件
+		for (var i = 0; i < oNavlist.length; i++) {
+			oNavlist[i].index = i;
+			oNavlist[i].onclick = function () {
+				index = this.index + 1;
+				navmove();
+				animate(slider, {
+					left: -1200 * index
+				});
+			}
+
+		}
+		//图片切换时按钮样式跟着切换
+		function navmove() {
+			for (var i = 0; i < oNavlist.length; i++) {
+				oNavlist[i].className = "";
+			}
+			if (index > 5) {
+				oNavlist[0].className = "active";
+			} else if (index <= 0) {
+				oNavlist[4].className = "active";
+			} else {
+				oNavlist[index - 1].className = "active";
+			}
+		}
+		//页面打开时自动滚动切换
+		timer = setInterval(next, 3000);
+	</script>
+</body>
+
+</html>

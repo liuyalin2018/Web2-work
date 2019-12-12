@@ -1,0 +1,104 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+ul,
+li {
+	list-style: none;
+}
+.bigbox{
+	width: 1350px;
+	height: 450px;
+	margin: 100px auto;
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+	position: relative;
+}
+.title{
+	width: 1350px;
+	height: 15px;
+	background: #ccc;
+}
+#pic{
+	float: left;
+	margin-left: 160px;
+}
+.text1{
+	width: 1020px;
+	height: 15px;
+	float: right;
+	margin-right: 150px;
+	position: relative;
+	left: 0px;
+	top: 0px;
+	overflow: hidden;
+}
+.ul{
+    width: 2600px;
+    position: absolute;//子元素相对于父元素绝对定位
+}
+.txt{
+	width: 1300px;
+	float: left;
+	font-size: 10px;
+	color: red;
+}
+.slider{
+	width: 8400px;
+	position: absolute;
+	left: -1200px;
+}
+.box{
+	width: 1200px;
+	height: 397px;
+	margin: 100px auto;
+	margin-top: 15px;
+	position: relative;
+	overflow: hidden;
+}
+.slide{
+	width: 1200px;
+	float: left;
+}
+
+.box>span{
+	display: block;
+	width: 30px;
+	height: 50px;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+	top: 175px;
+	line-height: 50px;
+	background: rgb(255, 0, 0);
+	font-size: 30px;
+	position: absolute;
+	opacity: 0.7;
+}
+
+#lef{
+	left: 30px;
+}
+#right{
+	right: 30px;
+}
+.nav{
+	position: absolute;
+	text-align: center;
+	left: 500px;
+	bottom: 20px;
+}
+.nav>li{
+	float: left;
+	width: 20px;
+	height: 20px;
+	background: #ccc;
+	cursor: pointer;
+	margin: 0 10px;
+	border-radius: 50%;
+}
+.nav .active{
+	background: red;
+	color: white;
+}
